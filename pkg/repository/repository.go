@@ -1,31 +1,34 @@
 package repository
 
-import "github.com/jmoiron/sqlx"
+import (
+	"awesomeProject1"
+	"github.com/jmoiron/sqlx"
+)
 
-type TodoList interface {
-	Create(userId int, list todo.TodoList) (int, error)
-	GetAll(userId int) ([]todo.TodoList, error)
-	GetById(userId, listId int) (todo.TodoList, error)
-	Delete(userId, listId int) error
-	Update(userId, listId int, input todo.UpdateListInput) error
+type AvitoUser interface {
+	Create(user awesomeProject1.UserUpdate) (int, error)
+	GetAll() ([]awesomeProject1.User, error)
+	GetById(userId int) (awesomeProject1.User, error)
+	Delete(userId int) error
+	Update(userId int, input awesomeProject1.UserUpdate) (int, error)
 }
 
-type TodoItem interface {
-	Create(listId int, item todo.TodoItem) (int, error)
-	GetAll(userId, listId int) ([]todo.TodoItem, error)
-	GetById(userId, itemId int) (todo.TodoItem, error)
-	Delete(userId, itemId int) error
-	Update(userId, itemId int, input todo.UpdateItemInput) error
+type AvitoSegment interface {
+	Create(segment awesomeProject1.SegmentsUpdate) (int, error)
+	GetAll() ([]awesomeProject1.Segment, error)
+	GetById(segmentId int) (awesomeProject1.Segment, error)
+	Delete(segmentId int) error
+	Update(segmentId int, input awesomeProject1.SegmentsUpdate) (int, error)
 }
 
 type Repository struct {
-	TodoList
-	TodoItem
+	AvitoUser
+	AvitoSegment
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
-		TodoList: NewTodoListPostgres(db),
-		TodoItem: NewTodoItemPostgres(db),
+		AvitoUser:    NewAvitoUserPostgres(db),
+		AvitoSegment: NewAvitoSegmentPostgres(db),
 	}
 }

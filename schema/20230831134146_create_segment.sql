@@ -13,6 +13,12 @@ CREATE TABLE users
     user_segments varchar(255)
 
 );
+
+CREATE TABLE updated_user_segments(
+    id serial unique not null references users(id),
+    update_user_segments varchar(255),
+    updated_at  timestamp default now()
+);
 -- +goose StatementEnd
 
 

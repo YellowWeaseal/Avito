@@ -1,9 +1,9 @@
-port: "8000",
+port: "8000"
 
-        db:
-          username: "admin"
-          host: "localhost"
-          port: "8080"
-          password: "admin"
-          dbname: "postgres"
-          sslmode: "disable"
+db:
+  username: "postgres"
+  host: "localhost"
+  port: "5434"
+  password: "postgres"
+  dbname: "avito_service"
+  sslmode: "disable"
